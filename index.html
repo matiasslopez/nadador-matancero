@@ -10,12 +10,17 @@
   html, body { margin: 0; height: 100%; background: #000; overflow: hidden; touch-action: none;
     user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; font-family: monospace; }
   #game { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); image-rendering: pixelated; }
-  #hint { position: fixed; top: 2vh; left: 0; right: 0; text-align: center; color: #fff; font-size: max(13px, 3.2vh);
+  #hint { position: fixed; top: 10vh; left: 0; right: 0; text-align: center; color: #fff; font-size: max(13px, 3.2vh);
     text-shadow: 0 0 3px #000, 0 0 3px #000; pointer-events: none; padding: 0 20vh; }
   #banner { display: none; position: fixed; top: 30%; left: 0; right: 0; text-align: center; color: #ffe066;
     text-shadow: 2px 2px 0 #000; pointer-events: none; }
   #banner h1 { margin: 0; font-size: 9vh; letter-spacing: .1em; }
   #banner p { margin: 1vh 0 0; color: #fff; font-size: max(14px, 3.6vh); }
+  #hud { position: fixed; top: 1.5vh; left: 2vh; right: 2vh; display: flex; justify-content: space-between; align-items: center; gap: 2vh;
+    color: #fff; font-size: max(12px, 3.4vh); font-weight: bold; text-shadow: 0 0 3px #000, 0 0 3px #000; pointer-events: none; white-space: pre; }
+  #air { width: 22vh; height: 2.4vh; border: 2px solid rgba(255,255,255,.8); border-radius: 2vh; overflow: hidden; background: rgba(0,0,0,.4); }
+  #airfill { height: 100%; width: 100%; }
+  #styles { font-size: max(10px, 2.6vh); color: #bfe8ff; }
   #touch { display: none; }
   @media (pointer: coarse) { #touch { display: block; } }
   .pad, .btn { position: fixed; border-radius: 50%; background: rgba(255,255,255,.14); border: 2px solid rgba(255,255,255,.35);
@@ -24,18 +29,23 @@
   #dpad span { position: absolute; } #dpad .u { top: 3%; } #dpad .d { bottom: 3%; } #dpad .l { left: 6%; } #dpad .r { right: 6%; }
   #bStroke { right: 5vh; bottom: 7vh; width: 28vh; height: 28vh; font-size: 4vh; }
   #bDolphin { right: 36vh; bottom: 4vh; width: 18vh; height: 18vh; font-size: 3.2vh; }
+  #bDive { right: 33vh; bottom: 25vh; width: 18vh; height: 18vh; font-size: 3vh; }
+  #bLap { right: 7vh; bottom: 39vh; width: 13vh; height: 13vh; font-size: 3vh; }
   #rotate { display: none; position: fixed; inset: 0; background: #0b1a2e; color: #fff; font-size: 6vw; align-items: center; justify-content: center; text-align: center; }
   @media (orientation: portrait) and (pointer: coarse) { #rotate { display: flex; } }
 </style>
 </head>
 <body>
 <canvas id="game" width="320" height="180"></canvas>
+<div id="hud"><span id="stats"></span><span id="styles"></span><div id="air"><div id="airfill"></div></div></div>
 <div id="hint"></div>
 <div id="banner"></div>
 <div id="touch">
   <div id="dpad" class="pad"><span class="u">▲</span><span class="d">▼</span><span class="l">◀</span><span class="r">▶</span></div>
   <div id="bStroke" class="btn" data-k="stroke">BRAZADA</div>
   <div id="bDolphin" class="btn" data-k="dolphin">DELFÍN</div>
+  <div id="bDive" class="btn" data-k="dive">SUMERGIR</div>
+  <div id="bLap" class="btn" data-k="lap">LAP</div>
 </div>
 <div id="rotate">Girá el celu<br>para nadar 🏊</div>
 <script src="levels.js"></script>
