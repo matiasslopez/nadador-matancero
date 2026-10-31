@@ -16,7 +16,7 @@ const ENTRY_DAMP = 0.35;     // cuánto frena el agua al caer en ella (0 = frena
 const DIVE_IMPULSE = 2.8;    // empujón hacia abajo al tocar Sumergir
 const DIVE_SINK = 0.08;      // mientras mantenés Sumergir, en vez de flotar te hundís con esta fuerza
 // --- Aire ---
-const AIR_TIME = 8;          // segundos que aguantás bajo el agua
+const AIR_TIME = 5;        // segundos que aguantás bajo el agua
 const AIR_REFILL = 0.5;      // segundos para llenar la barra al respirar
 const AIR_WARN = 0.3;        // con menos de esta parte de la barra, titila
 // --- Fuera del agua ---
@@ -269,6 +269,9 @@ function drawTile(ch, c, r, x, y) {
     const w = [4, 3, 1, 3][(t >> 3) % 4], o = (4 - w) / 2 + 2;
     ctx.fillStyle = '#f4c430'; ctx.fillRect(x + o, y + 1, w, 6); ctx.fillRect(x + o - (w > 1), y + 2, w + 2 * (w > 1), 4);
     ctx.fillStyle = '#fff6b0'; ctx.fillRect(x + o, y + 2, 1, 2);
+  } else if (ch === '=') { // banderines colgados sobre el borde
+    ctx.fillStyle = '#ddd'; ctx.fillRect(x, y + 1, 8, 1);
+    ctx.fillStyle = c % 2 ? '#e33' : '#ffe066'; ctx.fillRect(x + 1, y + 2, 5, 1); ctx.fillRect(x + 2, y + 3, 3, 1); ctx.fillRect(x + 3, y + 4, 1, 1);
   } else if (ch === 'U') token(x, y, '#4dd0e1', '#0b4f6c');
   else if (ch === 'M') token(x, y, '#ffb13b', '#7a3ccf');
   else if (ch === 'C') {
