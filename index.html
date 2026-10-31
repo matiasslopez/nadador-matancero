@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Nadador Matancero</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; touch-action: none;
+    user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; font-family: monospace; }
+  #game { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); image-rendering: pixelated; }
+  #hint { position: fixed; top: 2vh; left: 0; right: 0; text-align: center; color: #fff; font-size: max(13px, 3.2vh);
+    text-shadow: 0 0 3px #000, 0 0 3px #000; pointer-events: none; padding: 0 20vh; }
+  #banner { display: none; position: fixed; top: 30%; left: 0; right: 0; text-align: center; color: #ffe066;
+    text-shadow: 2px 2px 0 #000; pointer-events: none; }
+  #banner h1 { margin: 0; font-size: 9vh; letter-spacing: .1em; }
+  #banner p { margin: 1vh 0 0; color: #fff; font-size: max(14px, 3.6vh); }
+  #touch { display: none; }
+  @media (pointer: coarse) { #touch { display: block; } }
+  .pad, .btn { position: fixed; border-radius: 50%; background: rgba(255,255,255,.14); border: 2px solid rgba(255,255,255,.35);
+    color: rgba(255,255,255,.9); text-shadow: 0 0 3px #000; display: flex; align-items: center; justify-content: center; font-weight: bold; pointer-events: none; }
+  #dpad { left: 4vh; bottom: 5vh; width: 40vh; height: 40vh; font-size: 6vh; }
+  #dpad span { position: absolute; } #dpad .u { top: 3%; } #dpad .d { bottom: 3%; } #dpad .l { left: 6%; } #dpad .r { right: 6%; }
+  #bStroke { right: 5vh; bottom: 7vh; width: 28vh; height: 28vh; font-size: 4vh; }
+  #bDolphin { right: 36vh; bottom: 4vh; width: 18vh; height: 18vh; font-size: 3.2vh; }
+  #rotate { display: none; position: fixed; inset: 0; background: #0b1a2e; color: #fff; font-size: 6vw; align-items: center; justify-content: center; text-align: center; }
+  @media (orientation: portrait) and (pointer: coarse) { #rotate { display: flex; } }
+</style>
+</head>
+<body>
+<canvas id="game" width="320" height="180"></canvas>
+<div id="hint"></div>
+<div id="banner"></div>
+<div id="touch">
+  <div id="dpad" class="pad"><span class="u">▲</span><span class="d">▼</span><span class="l">◀</span><span class="r">▶</span></div>
+  <div id="bStroke" class="btn" data-k="stroke">BRAZADA</div>
+  <div id="bDolphin" class="btn" data-k="dolphin">DELFÍN</div>
+</div>
+<div id="rotate">Girá el celu<br>para nadar 🏊</div>
+<script src="levels.js"></script>
+<script src="ui.js"></script>
+<script src="engine.js"></script>
+</body>
+</html>
