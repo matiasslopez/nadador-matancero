@@ -9,12 +9,14 @@ const UI = {
     clearTimeout(this.bt); if (ms) this.bt = setTimeout(() => b.style.display = 'none', ms);
   },
   clear() { $('banner').style.display = 'none'; },
+  // Frase corta arriba (la profe, los especiales, los choques)
+  say(text) { const s = $('say'); s.textContent = text; s.style.display = 'block'; clearTimeout(this.st); this.st = setTimeout(() => s.style.display = 'none', 2200); },
   hint(text) { if (text !== this.last) $('hint').textContent = this.last = text; },
   button(id, on) { $(id).style.display = on ? '' : 'none'; },
   clock(f) { const s = f / 60; return `${Math.floor(s / 60)}:${(s % 60).toFixed(1).padStart(4, '0')}`; },
-  // HUD: vidas, medallas, laps, cronómetro, estilos y barra de aire
+  // HUD: vidas, tornillos, laps, cronómetro, estilos y barra de aire
   hud(p, styles, blink) {
-    const top = `♥ ${p.lives}  ● ${p.medals}  ⟲ ${p.laps}  ⏱ ${this.clock(p.time)}`;
+    const top = `♥ ${p.lives}  🔩 ${p.screws}  ⟲ ${p.laps}  ⏱ ${this.clock(p.time)}`;
     if (top !== this.lt) $('stats').textContent = this.lt = top;
     if (styles !== this.ls) $('styles').textContent = this.ls = styles;
     $('airfill').style.width = p.air * 100 + '%';

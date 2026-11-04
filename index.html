@@ -22,6 +22,16 @@
   #air { width: 22vh; height: 2.4vh; border: 2px solid rgba(255,255,255,.8); border-radius: 2vh; overflow: hidden; background: rgba(0,0,0,.4); }
   #airfill { height: 100%; width: 100%; }
   #styles { font-size: max(10px, 2.6vh); color: #bfe8ff; }
+  #say { display: none; position: fixed; top: 7vh; left: 0; right: 0; text-align: center; color: #ffe08a; font-size: max(12px, 3vh); font-weight: bold;
+    text-shadow: 0 0 3px #000, 0 0 3px #000; pointer-events: none; }
+  #pick { display: none; position: fixed; inset: 0; z-index: 5; background: rgba(8,20,40,.95); color: #fff; flex-direction: column; align-items: center; justify-content: center; gap: 2vh; }
+  #pick h1 { margin: 0; color: #ffe066; font-size: 7vh; letter-spacing: .1em; text-shadow: 2px 2px 0 #000; }
+  #pick p { margin: 0; font-size: max(12px, 3vh); }
+  #cards { display: flex; gap: 2vw; padding: 0 2vw; }
+  .card { flex: 1; max-width: 24vw; border: 2px solid rgba(255,255,255,.3); border-radius: 2vh; padding: 1.5vh 1vw; display: flex; flex-direction: column; align-items: center; gap: .8vh; text-align: center; cursor: pointer; }
+  .card.sel { border-color: #ffe066; background: rgba(255,224,102,.1); }
+  .card canvas { width: 9vh; height: 12vh; image-rendering: pixelated; }
+  .card b { font-size: max(13px, 4vh); color: #ffe066; } .card i { font-size: max(10px, 2.5vh); color: #bfe8ff; } .card span { font-size: max(10px, 2.5vh); }
   #touch { display: none; }
   @media (pointer: coarse) { #touch { display: block; } }
   .pad, .btn { position: fixed; border-radius: 50%; background: rgba(255,255,255,.14); border: 2px solid rgba(255,255,255,.35);
@@ -31,6 +41,7 @@
   #bStroke { right: 5vh; bottom: 7vh; width: 28vh; height: 28vh; font-size: 4vh; }
   #bDolphin { right: 36vh; bottom: 4vh; width: 18vh; height: 18vh; font-size: 3.2vh; }
   #bDive { right: 33vh; bottom: 25vh; width: 18vh; height: 18vh; font-size: 3vh; }
+  #bSpecial { right: 25vh; bottom: 45vh; width: 16vh; height: 16vh; font-size: 2.6vh; text-align: center; }
   #bLap { right: 7vh; bottom: 39vh; width: 13vh; height: 13vh; font-size: 3vh; }
   #rotate { display: none; position: fixed; inset: 0; background: #0b1a2e; color: #fff; font-size: 6vw; align-items: center; justify-content: center; text-align: center; }
   @media (orientation: portrait) and (pointer: coarse) { #rotate { display: flex; } }
@@ -41,11 +52,14 @@
 <div id="hud"><span id="stats"></span><span id="styles"></span><div id="air"><div id="airfill"></div></div></div>
 <div id="hint"></div>
 <div id="banner"></div>
+<div id="say"></div>
+<div id="pick"><h1>NADADOR MATANCERO</h1><p>Elegí nadador</p><div id="cards"></div></div>
 <div id="touch">
   <div id="dpad" class="pad"><span class="u">▲</span><span class="d">▼</span><span class="l">◀</span><span class="r">▶</span></div>
   <div id="bStroke" class="btn" data-k="stroke">BRAZADA</div>
   <div id="bDolphin" class="btn" data-k="dolphin">DELFÍN</div>
   <div id="bDive" class="btn" data-k="dive">SUMERGIR</div>
+  <div id="bSpecial" class="btn" data-k="special">★</div>
   <div id="bLap" class="btn" data-k="lap">LAP</div>
 </div>
 <div id="rotate">Girá el celu<br>para nadar 🏊</div>
